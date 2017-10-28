@@ -1,0 +1,8 @@
+replicas: 1
+name: operator-demo
+registry: liqingsanjin
+image:
+  repositry: jingx
+  tag: 1.1.13
+rbac:
+  install: true

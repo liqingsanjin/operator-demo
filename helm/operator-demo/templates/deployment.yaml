@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+{{- if .Values.rbac.install }}
+      serviceAccountName: operator-sa
+{{- end }}
+      containers:
+      - name: {{ .Values.name }}
+        image: "{{ .Values.registry }}/{{ .Values.image.repositry }}:{{ .Values.image.tag }}"

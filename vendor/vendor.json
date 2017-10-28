@@ -57,7 +57,6 @@
 			"revisionTime": "2017-02-08T21:56:40Z"
 		},
 		{
-			"checksumSHA1": "m7tzrK8+fNUW4+TMdf1GHWvyrcw=",
 			"path": "github.com/emicklei/go-restful-swagger12/test_package",
 			"revision": "dcef7f55730566d41eae5db10e7d6981829720f6"
 		},
@@ -72,6 +71,12 @@
 			"path": "github.com/ghodss/yaml",
 			"revision": "0ca9ea5df5451ffdf184b4428c902747c2c11cd7",
 			"revisionTime": "2017-03-27T23:54:44Z"
+		},
+		{
+			"checksumSHA1": "N28rQTHy4hKL2UXALUFiRsDvMEE=",
+			"path": "github.com/go-ini/ini",
+			"revision": "5b3e00af70a9484542169a976dcab8d03e601a17",
+			"revisionTime": "2017-10-14T21:05:30Z"
 		},
 		{
 			"checksumSHA1": "gghJZDIPidsnJsYZkSxtXp7TFcs=",
@@ -282,6 +287,54 @@
 			"path": "github.com/mailru/easyjson/jwriter",
 			"revision": "2f5df55504ebc322e4d52d34df6a1f5b503bf26d",
 			"revisionTime": "2017-06-24T19:09:26Z"
+		},
+		{
+			"checksumSHA1": "ukAq3Y89ofKkCXeoj/oJNu3K2fw=",
+			"path": "github.com/minio/go-homedir",
+			"revision": "21304a94172ae3a09dee2cd86a12fb6f842138c7",
+			"revisionTime": "2016-02-15T11:55:11Z"
+		},
+		{
+			"checksumSHA1": "E6nzAtKNcN4rVLhrSYNo9Nn9CTE=",
+			"path": "github.com/minio/minio-go",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "v742/COA4ia/FvGSM+DNb24W8vk=",
+			"path": "github.com/minio/minio-go/pkg/credentials",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "pggIpSePizRBQ7ybhB0CuaSQydw=",
+			"path": "github.com/minio/minio-go/pkg/encrypt",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "C9HRCSySeLNcr0fO1msLI/UtZfk=",
+			"path": "github.com/minio/minio-go/pkg/policy",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "Ds2Z8sXqAXkgXU1ra2cTqpE/qi4=",
+			"path": "github.com/minio/minio-go/pkg/s3signer",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "AYGRKbeT0c697k2BRAkO9AS3NGo=",
+			"path": "github.com/minio/minio-go/pkg/s3utils",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
+		},
+		{
+			"checksumSHA1": "e3ckeCLp3014yvYpS2Oao4zBARk=",
+			"path": "github.com/minio/minio-go/pkg/set",
+			"revision": "944f2387ee2e8cb0b81824f49881903533027e87",
+			"revisionTime": "2017-10-17T08:09:55Z"
 		},
 		{
 			"checksumSHA1": "854pdsaKqYdci0fz/lORfAsznqY=",
@@ -898,7 +951,6 @@
 			"versionExact": "release-1.7"
 		},
 		{
-			"checksumSHA1": "o1JnKA454fV3vkThDTYTTXZhCWc=",
 			"path": "k8s.io/apimachinery/pkg/runtime/serializer/testing",
 			"revision": "dc1f89aff9a7509782bde3b68824c8043a3e58cc",
 			"version": "release-1.7",
@@ -913,7 +965,6 @@
 			"versionExact": "release-1.7"
 		},
 		{
-			"checksumSHA1": "HCndkQ+xacym7Ar9zBGP0MJtQBs=",
 			"path": "k8s.io/apimachinery/pkg/runtime/testing",
 			"revision": "dc1f89aff9a7509782bde3b68824c8043a3e58cc",
 			"version": "release-1.7",
@@ -1730,5 +1781,5 @@
 			"revisionTime": "2015-07-21T03:42:11Z"
 		}
 	],
-	"rootPath": "operator-demo"
+	"rootPath": "github.com/qbox/zuma"
 }

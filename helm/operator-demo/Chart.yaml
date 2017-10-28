@@ -1,0 +1,5 @@
+name: operator-demo
+version: 0.1.0
+description: An operator demo for nginx
+home: https://github.com/liqingsanjin/operator-demo
+apiVersion: v1
