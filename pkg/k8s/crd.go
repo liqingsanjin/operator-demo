@@ -1,4 +1,4 @@
-package ks8
+package k8s
 
 import (
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
@@ -6,7 +6,7 @@ import (
 )
 
 type CRDConfig struct {
-	Name    string // format: Plural.Group
+	Name    string
 	Kind    string
 	Plural  string
 	Group   string

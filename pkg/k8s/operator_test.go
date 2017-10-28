@@ -1,23 +1,23 @@
-package ks8
+package k8s
 
 import (
-	"testing"
-	"strings"
-	"os"
 	"context"
+	"os"
+	"strings"
+	"testing"
 	"time"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
-	log "github.com/sirupsen/logrus"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 var (
-	testCRDKind   = "MyCRD"
-	testCRDPlural = strings.ToLower(testCRDKind) + "s"
+	testCRDKind    = "MyCRD"
+	testCRDPlural  = strings.ToLower(testCRDKind) + "s"
 	testCRDGroup   = "example.com"
 	testCRDVersion = "v1"
 	testCRDName    = testCRDPlural + "." + testCRDGroup
@@ -67,8 +67,8 @@ func TestNewOperator(t *testing.T) {
 	config := &OperatorConfig{
 		KubeConfigPath: os.Getenv("HOME") + "/.kube/config",
 		WatchNamespace: "",
-		ResyncPeriod: 0,
-		Handlers: &EventHandler{},
+		ResyncPeriod:   0,
+		Handlers:       &EventHandler{},
 	}
 
 	operator, err := NewOperator(config)
@@ -101,7 +101,6 @@ func TestNewOperator(t *testing.T) {
 }
 
 type EventHandler struct {
-
 }
 
 func (e *EventHandler) OnAdd(obj interface{}) {

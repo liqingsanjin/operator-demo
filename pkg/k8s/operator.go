@@ -1,4 +1,4 @@
-package ks8
+package k8s
 
 import (
 	"fmt"
@@ -32,8 +32,8 @@ type OperatorConfig struct {
 
 type Operator struct {
 	kubeconfig *rest.Config
-	config  *OperatorConfig
-	aclient *clientset.Clientset
+	config     *OperatorConfig
+	aclient    *clientset.Clientset
 }
 
 func NewOperator(config *OperatorConfig) (*Operator, error) {
