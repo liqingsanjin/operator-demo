@@ -69,6 +69,7 @@ func TestNewOperator(t *testing.T) {
 		WatchNamespace: "",
 		ResyncPeriod:   0,
 		Handlers:       &EventHandler{},
+		IsInCluster:    false,
 	}
 
 	operator, err := NewOperator(config)

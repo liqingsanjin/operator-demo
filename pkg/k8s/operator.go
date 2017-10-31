@@ -7,17 +7,17 @@ import (
 	"golang.org/x/net/context"
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
 	"k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
-	"k8s.io/apimachinery/pkg/util/errors"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/fields"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/runtime/serializer"
+	"k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/tools/clientcmd"
-	apierrors "k8s.io/apimachinery/pkg/api/errors"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 type OperatorConfig struct {
@@ -28,6 +28,8 @@ type OperatorConfig struct {
 	ResyncPeriod time.Duration
 
 	Handlers cache.ResourceEventHandler
+
+	IsInCluster bool
 }
 
 type Operator struct {
@@ -37,7 +39,13 @@ type Operator struct {
 }
 
 func NewOperator(config *OperatorConfig) (*Operator, error) {
-	kubeconfig, err := clientcmd.BuildConfigFromFlags("", config.KubeConfigPath)
+	var kubeconfig *rest.Config
+	var err error = nil
+	if config.IsInCluster {
+		kubeconfig, err = rest.InClusterConfig()
+	} else {
+		kubeconfig, err = clientcmd.BuildConfigFromFlags("", config.KubeConfigPath)
+	}
 	if err != nil {
 		return nil, err
 	}
