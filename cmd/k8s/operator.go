@@ -4,7 +4,6 @@ import (
 	"context"
 	"os"
 	"strings"
-	"time"
 
 	log "github.com/sirupsen/logrus"
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
@@ -74,5 +73,6 @@ func main() {
 			return nil
 		},
 	}, crdConfig)
-	time.Sleep(10 * time.Second)
+	ch := make(chan int)
+	ch <- 1
 }
