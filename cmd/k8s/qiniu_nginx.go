@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"os"
-	"strings"
 
 	log "github.com/sirupsen/logrus"
 	"k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
@@ -14,17 +13,16 @@ import (
 	"operator-demo/pkg/k8s"
 )
 
-var (
-	QiniuNginxKind    = "QiniuNginx"
-	QiniuNginxPlural  = strings.ToLower(QiniuNginxKind) + "s"
-	QiniuNginxGroup   = "example.com"
-	QiniuNginxVersion = "v1"
-	QiniuNginxName    = QiniuNginxPlural + "." + QiniuNginxGroup
-	namespace         = "default"
-)
-
 func main() {
-	kubeconfigpath := os.Getenv("INCLUSTER")
+	var (
+		kubeconfigpath    = os.Getenv("INCLUSTER")
+		QiniuNginxKind    = os.Getenv("QiniuNginxKind")
+		QiniuNginxPlural  =	os.Getenv("QiniuNginxPlural")
+		QiniuNginxGroup   = os.Getenv("QiniuNginxGroup")
+		QiniuNginxVersion = os.Getenv("QiniuNginxVersion")
+		QiniuNginxName    = os.Getenv("QiniuNginxName")
+		namespace         = os.Getenv("namespace")
+	)
 	if kubeconfigpath == "yes" {
 		kubeconfigpath = ""
 	} else {
