@@ -24,31 +24,31 @@ Case DELETE: Delete all the pods
 
 1. Enter the root dir of the project, $operator-demo is the project dir
 
-`
+``
 
     cd $GOPATH/src/operator-demo
     
 
-`
+``
 
 2. Build app, docker image and push the image
         
-`
+``
 
    sh dockerfiles/qiniu-nginx/build.sh yourImage
 
-`
+``
 
 3. Update the the image in the file (yaml/demo/qiniu_nginx.yaml). Then deploy the app in k8s cluster
 
-`
+``
 
     kubectl create -f yaml/demo/qiniu_nginx.yaml
 
-`
+``
 
 4. Create/Update/Delete an instance of the crd
-`
+``
 
     kubectl create -f yaml/demo/test_qiniu_nginx.yaml
 
@@ -56,6 +56,6 @@ Case DELETE: Delete all the pods
 
     kubectl delete -f yaml/demo/test_qiniu_nginx.yaml
 
-`
+``
 
 
