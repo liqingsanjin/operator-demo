@@ -1,7 +1,8 @@
-apiVersion: example.com/v1
-kind: QiniuNginx
+kind: Pod
+apiVersion: v1
 metadata:
-  name: qiniu-nginx
+  name: demo2
 spec:
-  replicas: 2
-  name: qiniu-nginx
+  containers:
+  - name: demo2
+    image: liqingsanjin/jingx:latest

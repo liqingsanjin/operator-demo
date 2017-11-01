@@ -23,8 +23,12 @@ var (
 )
 
 func main() {
-	kubeconfigpath := os.Getenv("KUBECONFIGPATH")
-	//kubeconfigpath := os.Getenv("HOME") + "/.kube/config"
+	kubeconfigpath := os.Getenv("INCLUSTER")
+	if kubeconfigpath == "yes" {
+		kubeconfigpath = ""
+	} else {
+		kubeconfigpath = os.Getenv("HOME") + "/.kube/config"
+	}
 	operator, err := k8s.NewOperator(kubeconfigpath)
 	if err != nil {
 		log.Fatal(err)
