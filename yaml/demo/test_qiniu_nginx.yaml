@@ -1,8 +1,8 @@
 apiVersion: example.com/v1
 kind: QiniuNginx
 metadata:
-  name: qiniu-nginx
+  name: qiniu-nginx1
 spec:
   replicas: 3
-  name: qiniu-nginx
+  name: qiniu-nginx1
   image: nginx:1.13.6
