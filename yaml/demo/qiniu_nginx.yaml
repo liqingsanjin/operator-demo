@@ -1,8 +1,8 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: demo2
+  name: demo-nginx
 spec:
   containers:
-  - name: demo2
+  - name: demo-nginx
     image: liqingsanjin/jingx:latest
