@@ -1,4 +1,4 @@
-#How to use it
+# How to use it
 
 1. cd $operator-demo //enter the root dir of the project, $operator-demo is the project dir
 
