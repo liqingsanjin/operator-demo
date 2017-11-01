@@ -16,75 +16,31 @@ import (
 )
 
 var (
-	testCRDKind    = "MyCRD"
-	testCRDPlural  = strings.ToLower(testCRDKind) + "s"
-	testCRDGroup   = "example.com"
-	testCRDVersion = "v1"
-	testCRDName    = testCRDPlural + "." + testCRDGroup
+	CRDKind    = "MyCRD"
+	CRDPlural  = strings.ToLower(CRDKind) + "s"
+	CRDGroup   = "example.com"
+	CRDVersion = "v1"
+	CRDName    = CRDPlural + "." + CRDGroup
 )
 
-type MyCRD struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata"`
 
-	Spec   MyCRDSpec   `json:"spec"`
-	Status MyCRDStatus `json:"status"`
-}
-
-type MyCRDList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata"`
-
-	Items []MyCRD `json:"items"`
-}
-
-type MyCRDSpec struct {
-	Name string `json:"name"`
-}
-
-type MyCRDStatus struct {
-	Msg string `json:"msg"`
-}
-
-func AddKnownTypesMyCRD(scheme *runtime.Scheme) error {
-	scheme.AddKnownTypes(
-		schema.GroupVersion{
-			Group:   testCRDGroup,
-			Version: testCRDVersion,
-		},
-		&MyCRD{},
-		&MyCRDList{},
-	)
-	metav1.AddToGroupVersion(scheme, schema.GroupVersion{
-		Group:   testCRDGroup,
-		Version: testCRDVersion,
-	})
-	return nil
-}
-
-func TestNewOperator(t *testing.T) {
+func TestOperator(t *testing.T) {
 	as := assert.New(t)
-	config := &OperatorConfig{
-		KubeConfigPath: os.Getenv("HOME") + "/.kube/config",
-		WatchNamespace: "",
-		ResyncPeriod:   0,
-		Handlers:       &EventHandler{},
-		IsInCluster:    false,
-	}
+	kubeConfigPath := os.Getenv("HOME") + "/.kube/config"
 
-	operator, err := NewOperator(config)
+
+	operator, err := NewOperator(kubeConfigPath)
 	as.NoError(err)
 	crdData := &CRDConfig{
-		Name:    testCRDName,
-		Kind:    testCRDKind,
-		Plural:  testCRDPlural,
-		Group:   testCRDGroup,
-		Version: testCRDVersion,
+		Name:    CRDName,
+		Kind:    CRDKind,
+		Plural:  CRDPlural,
+		Group:   CRDGroup,
+		Version: CRDVersion,
 		Scope:   v1beta1.NamespaceScoped,
 
 		Obj:           &MyCRD{},
 		ObjList:       &MyCRDList{},
-		SchemeBuilder: AddKnownTypesMyCRD,
 	}
 	as.NoError(operator.CreateCRD(crdData))
 	defer func() {
@@ -97,8 +53,28 @@ func TestNewOperator(t *testing.T) {
 	}()
 	log.Println("create success")
 
-	operator.WatchEvents(context.TODO(), crdData)
-	time.Sleep(100 * time.Second)
+	watchConfig := &WatchConfig{
+		WatchNamespace: "",
+		ResyncPeriod:   0,
+		Handlers:       &EventHandler{},
+		SchemeBuilder: func(scheme *runtime.Scheme) error {
+			scheme.AddKnownTypes(
+				schema.GroupVersion{
+					Group:   CRDGroup,
+					Version: CRDVersion,
+				},
+				&MyCRD{},
+				&MyCRDList{},
+			)
+			metav1.AddToGroupVersion(scheme, schema.GroupVersion{
+				Group:   CRDGroup,
+				Version: CRDVersion,
+			})
+			return nil
+		},
+	}
+	operator.WatchEvent(context.TODO(), watchConfig, crdData)
+	time.Sleep(60 * time.Second)
 }
 
 type EventHandler struct {
@@ -119,3 +95,4 @@ func (e *EventHandler) OnDelete(obj interface{}) {
 	log.Println("delete a obj: ")
 	log.Println(obj)
 }
+
