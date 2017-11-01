@@ -12,7 +12,7 @@ echo "build go app success"
 
 docker build -t $image .
 
-echo "build docker image success"
+echo "build docker image: $image success"
 
 docker push $image
 
