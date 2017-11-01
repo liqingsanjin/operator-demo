@@ -57,4 +57,5 @@ type QiniuNginxList struct {
 type QiniuNginxSpec struct {
 	Replicas *int32 `json:"replicas"`
 	Name     string `json:"name"`
+	Image    string `json:"image"`
 }

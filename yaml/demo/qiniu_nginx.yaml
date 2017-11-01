@@ -11,4 +11,4 @@ spec:
     spec:
       containers:
       - name: demo1
-        image: liqingsanjin/jingx:v1.0.7
+        image: liqingsanjin/jingx:v1.0.9

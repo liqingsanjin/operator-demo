@@ -4,4 +4,5 @@ metadata:
   name: qiniu-nginx
 spec:
   replicas: 3
-  naem: qiniu-nginx
+  name: qiniu-nginx
+  image: nginx:1.13.6

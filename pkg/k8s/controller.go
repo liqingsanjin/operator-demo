@@ -125,7 +125,7 @@ func (q *QiniuNginxController) UpdateNginxVersion(newngxin *QiniuNginx) error {
 					Containers: []apiv1.Container{
 						apiv1.Container{
 							Name:  "nginx",
-							Image: "nginx:latest",
+							Image: newngxin.Spec.Image,
 							Ports: []apiv1.ContainerPort{
 								apiv1.ContainerPort{
 									ContainerPort: 80,
