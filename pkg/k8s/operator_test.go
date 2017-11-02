@@ -23,11 +23,9 @@ var (
 	CRDName    = CRDPlural + "." + CRDGroup
 )
 
-
 func TestOperator(t *testing.T) {
 	as := assert.New(t)
 	kubeConfigPath := os.Getenv("HOME") + "/.kube/config"
-
 
 	operator, err := NewOperator(kubeConfigPath)
 	as.NoError(err)
@@ -39,8 +37,8 @@ func TestOperator(t *testing.T) {
 		Version: CRDVersion,
 		Scope:   v1beta1.NamespaceScoped,
 
-		Obj:           &MyCRD{},
-		ObjList:       &MyCRDList{},
+		Obj:     &MyCRD{},
+		ObjList: &MyCRDList{},
 	}
 	as.NoError(operator.CreateCRD(crdData))
 	defer func() {
@@ -95,4 +93,3 @@ func (e *EventHandler) OnDelete(obj interface{}) {
 	log.Println("delete a obj: ")
 	log.Println(obj)
 }
-

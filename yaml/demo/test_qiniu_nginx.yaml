@@ -6,3 +6,4 @@ spec:
   replicas: 3
   name: qiniu-nginx1
   image: nginx:1.13.6
+  port: 80

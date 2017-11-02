@@ -28,6 +28,7 @@ type QiniuNginxController struct {
 	kubeClient *kubernetes.Clientset
 	apiClient  *apiserverclient.Clientset
 	deploy     DeploymentInterface
+	service    ServiceInterface
 }
 
 func NewQiniuNginxController(kubeClient *kubernetes.Clientset, apiClient *apiserverclient.Clientset, namespace string) *QiniuNginxController {
@@ -35,6 +36,7 @@ func NewQiniuNginxController(kubeClient *kubernetes.Clientset, apiClient *apiser
 	controller.kubeClient = kubeClient
 	controller.apiClient = apiClient
 	controller.deploy = NewDeployments(kubeClient, namespace)
+	controller.service = NewService(kubeClient, namespace)
 	return controller
 }
 
@@ -101,6 +103,26 @@ func (q *QiniuNginxController) DeployNginx(nginx *QiniuNginx) error {
 			},
 		},
 	}))
+	if err != nil {
+		return err
+	}
+	_, err = q.service.Create(q.service.MakeConfig(&ServiceData{
+		Name: nginx.Spec.Name,
+		Labels: map[string]string{
+			"app": "nginx_deploy_test",
+		},
+		Spec: apiv1.ServiceSpec{
+			Selector: map[string]string{
+				"app": "nginx_deploy_test",
+			},
+			Ports: []apiv1.ServicePort{
+				apiv1.ServicePort{
+					Port:     nginx.Spec.Port,
+					Protocol: "TCP",
+				},
+			},
+		},
+	}))
 	return err
 }
 
@@ -142,7 +164,12 @@ func (q *QiniuNginxController) UpdateNginxVersion(newngxin *QiniuNginx) error {
 
 func (q *QiniuNginxController) DeleteNginx(ngxin *QiniuNginx) error {
 	policy := metav1.DeletePropagationBackground
-	return q.deploy.Delete(ngxin.Spec.Name, &metav1.DeleteOptions{
+	err := q.deploy.Delete(ngxin.Spec.Name, &metav1.DeleteOptions{
 		PropagationPolicy: &policy,
 	})
+	if err != nil {
+		return err
+	}
+
+	return q.service.Delete(ngxin.Spec.Name)
 }
