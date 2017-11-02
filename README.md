@@ -3,17 +3,17 @@
 This is an operator-demo. You can use it to create CRD, and listen the events that contains
 ADD/UPDATE/DELETE event. 
 
-Case ADD : Create nginx's pods, k8s cluster can access it
+Event ADD: Create apps of nginx, k8s cluster can access it through cluster ip
 
-Case UPDATE: Update the version of nginx 
+Event UPDATE: Update the version of nginx 
 
-Case DELETE: Delete all the pods
+Event DELETE: Delete all of pods, deployments, and services
 
 # How to get it 
 
 ```
     
-    cd $GOPATH/src
+    cd $GOPATH/src/
     
     git clone https://github.com/liqingsanjin/operator-demo.git
 
