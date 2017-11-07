@@ -72,7 +72,7 @@ Event DELETE: Delete all of pods, deployments, and services
     kubectl yaml/demo/cluster_role_binding.yaml
 ```
  
-Then you need update the file(yaml/demo/qiniu_nginx.yaml), add the serviceAccountName in it.
+Then you need update the files(yaml/demo/qiniu_nginx.yaml, yaml/demo/cluster_role_binding.yaml), add the serviceAccountName and your namespace in them.
     
  ```
     serviceAccountName: yourServiceAccountName
