@@ -8,7 +8,6 @@ ENV	QiniuNginxPlural=qiniunginxs
 ENV	QiniuNginxGroup=example.com
 ENV	QiniuNginxVersion=v1
 ENV	QiniuNginxName="$QiniuNginxPlural.$QiniuNginxGroup"
-ENV namespace=default
 
 COPY ./app /app
 

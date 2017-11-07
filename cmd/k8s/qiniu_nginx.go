@@ -21,7 +21,6 @@ func main() {
 		QiniuNginxGroup   = os.Getenv("QiniuNginxGroup")
 		QiniuNginxVersion = os.Getenv("QiniuNginxVersion")
 		QiniuNginxName    = os.Getenv("QiniuNginxName")
-		namespace         = os.Getenv("namespace")
 	)
 	if kubeconfigpath == "yes" {
 		kubeconfigpath = ""
@@ -57,6 +56,12 @@ func main() {
 	}
 	log.Println("create success")
 
+	namespace, err := k8s.GetCurrentNS()
+
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(namespace)
 	controller := k8s.NewQiniuNginxController(operator.GetKubeClient(), operator.GetApiClient(), namespace)
 	operator.WatchEvent(context.TODO(), &k8s.WatchConfig{
 		WatchNamespace: "",
