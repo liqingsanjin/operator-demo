@@ -6,9 +6,9 @@ echo $image
 
 cd dockerfiles/qiniu-nginx/
 
-GOOS=linux GOARCH=amd64 go build -o app $GOPATH/src/operator-demo/cmd/k8s/qiniu_nginx.go
+GOOS=linux GOARCH=amd64 go install $GOPATH/src/operator-demo/cmd/k8s/qiniu_nginx.go
 
-cp ./app /app
+cp $GOBIN/qiniu_nginx /app
 
 echo "build go app success"
 
