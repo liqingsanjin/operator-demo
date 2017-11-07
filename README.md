@@ -57,5 +57,30 @@ Event DELETE: Delete all of pods, deployments, and services
     kubectl delete -f yaml/demo/test_qiniu_nginx.yaml
 
     ```
+ 
+ ## Run it on other namespace
+ 1. Create service account
+```
+    kubectl yaml/demo/service_account.yaml -n yourNamespace
+```
+ 2. Create cluster role 
+```
+    kubectl yaml/demo/cluster_role.yaml
+```
+ 3. Create cluster role binding
+```
+    kubectl yaml/demo/cluster_role_binding.yaml
+```
+ 
+Then you need update the file(yaml/demo/qiniu_nginx.yaml), add the serviceAccountName in it.
+    
+ ```
+    serviceAccountName: yourServiceAccountName
+ ```
+Create the app
+ ```
+    kubectl create yaml/demo/qiniu_nginx.yaml -n yourNamespace
+```
+    
 
 
