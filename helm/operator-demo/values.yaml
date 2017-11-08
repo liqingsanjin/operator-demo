@@ -5,4 +5,4 @@ image:
   repositry: jingx
   tag: 1.1.13
 rbac:
-  install: true
+  install: false
