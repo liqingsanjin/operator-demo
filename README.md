@@ -13,7 +13,7 @@ Event DELETE: Delete all of pods, deployments, and services
 
 ```
     
-    cd $GOPATH/src/
+    cd $GOPATH/src/github.com/liqingsanjin
     
     git clone https://github.com/liqingsanjin/operator-demo.git
 
