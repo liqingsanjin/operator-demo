@@ -3,6 +3,6 @@ name: operator-demo
 registry: liqingsanjin
 image:
   repositry: jingx
-  tag: 1.1.13
+  tag: 1.1.16
 rbac:
   install: false
